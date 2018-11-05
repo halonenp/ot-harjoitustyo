@@ -1,3 +1,6 @@
+gitlogin tulostus
+
+
 commit 46cc8a7724ddafaf8fd422f7d48459678ea979f5
 Author: Pyry Halonen <halnpy@live.fi>
 Date:   Mon Nov 5 17:53:52 2018 +0200
