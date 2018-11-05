@@ -1,4 +1,3 @@
-gitlogin tulostus
 
 
 commit 46cc8a7724ddafaf8fd422f7d48459678ea979f5
