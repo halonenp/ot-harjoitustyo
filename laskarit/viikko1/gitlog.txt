@@ -1,0 +1,103 @@
+commit 46cc8a7724ddafaf8fd422f7d48459678ea979f5
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Mon Nov 5 17:53:52 2018 +0200
+
+    file1 poistettu ja file2 on nyt file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d078d2b961961cd4a84bfd294ebb6cb861ca109a
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Mon Nov 5 17:49:09 2018 +0200
+
+    tiedostoja luotu ja filet lisätty
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 615f08fef5bba3301234d8739f55d34d357266c5
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:47:16 2018 +0200
+
+    tiedosto on nyt eka
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 84f4e5f03badfb64d27a829ff674328db4fb5a4a
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:41:52 2018 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 3f23fe005f42a6f6e3d21a0aa1172a07ae2a115f
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:32:15 2018 +0200
+
+    tiedostosta poistettu ja lisatty tekstiä
+
+ tiedosto.txt | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+commit a3062a0fbc4f3983f9ac49f2e0cb00c4cdcfdf91
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:30:37 2018 +0200
+
+    tiedostoon lisätty tekstiä
+
+ tiedosto.txt | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+commit ffb052e8a84d88e19fbffba98f1c3b248dcd8d60
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:20:22 2018 +0200
+
+    stuff luotu ja sen sisälle koff
+
+ stuff/koff.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit bc845fbc79854358a0e7ba85dfbc3c43f3e337e1
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:17:28 2018 +0200
+
+    muutettu tokaa ja kolmatta
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit d2b317e09808d8c5bcfa3ba44ac8c31a41985047
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:14:38 2018 +0200
+
+    kolmas.txt luotu
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 0ccefb33c8160d62ec5915568ef8002ae18ffd86
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:06:25 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 2 ++
+ toinen.txt   | 0
+ 2 files changed, 2 insertions(+)
+
+commit dd1685a392531b7dc77befb842d71d64023a1609
+Author: Pyry Halonen <halnpy@live.fi>
+Date:   Fri Nov 2 19:00:20 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
