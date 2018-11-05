@@ -17,6 +17,7 @@ https://github.com/halonenp/ot-harjoitustyo/blob/master/laskarit/viikko1/komento
 
 ~~kajdiaojje~~
 
+aldkjcioamdpcmpdam
 
 
 
