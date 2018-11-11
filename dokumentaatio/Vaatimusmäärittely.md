@@ -2,10 +2,10 @@
 
 ## Sovelluksen tarkoitus
 
-Sovellus on muistipeli, jossa on kaksi pelaajaa vastakkain. Peliä pelataan 16 kortilla eli 8 parilla. Sovellus koostuu kahdesta eri näkymästä: Aloitusnäkymästä ja pelinäkymästä.
+Sovellus on muistipeli, jossa on kaksi pelaajaa vastakkain. Peliä pelataan 16 kortilla eli 8 parilla. 
 
 ## Perusversion tarjoama toiminnallisuus
-
+Sovellus koostuu kahdesta eri näkymästä: Aloitusnäkymästä ja pelinäkymästä.
 ### Ennen peliä 
 
 * Pelaajat kirjoittavat nimensä
