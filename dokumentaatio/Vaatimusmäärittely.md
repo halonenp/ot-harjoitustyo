@@ -1,4 +1,4 @@
-### Vaatimusmäärittely
+# Vaatimusmäärittely
 
 ## Sovelluksen tarkoitus
 
@@ -6,12 +6,12 @@ Sovellus on muistipeli, jossa on kaksi pelaajaa vastakkain. Pelissä on 8 paria 
 
 ## Perusversion tarjoama toiminnallisuus
 
-# Ennen peliä 
+### Ennen peliä 
 
 * Pelaajat kirjoittavat nimet
 * Sovellus arpoo kumpi saa aloittaa
 
-# Pelaaminen
+### Pelaaminen
 
 * Pelaaja kääntää kaksi korttia, jos korteissa on eri kuva, niin vuoro vaihtuu toiselle pelaajalle
 * Jos käännetyissä korteissa on sama kuva, niin pelaaja saa parin itselleen. Pelaaja saa jatkaa vuoroaan
