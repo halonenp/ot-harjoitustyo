@@ -5,6 +5,7 @@
  */
 package Pairs;
 
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -22,11 +25,13 @@ import javafx.stage.Stage;
  */
 public class Menu extends Application {
 
-    Game game;
-    Cards card;
+    
 
     @Override
     public void start(Stage ikkuna) throws Exception {
+        Game game = new Game();
+        game.fill();
+        
         
         GridPane firstPlayer = new GridPane();
         Button but1 = new Button("Seuraava");
@@ -38,24 +43,52 @@ public class Menu extends Application {
         secondPlayer.add(but2, 0, 2);
         luoNakuna(secondPlayer, "Pelaajan 2 nimi");
 
-       
-        GridPane game = new GridPane();
-        for (int i = 0; i < 8; i++) {
-            game.add(new Button(Cards.PIILO.toString()), 0, i);
+        Button[][] buttonContainer = new Button[2][4];
+
+        VBox vbox = new VBox();
+
+        for (int i = 0; i < 2; i++) {
+            for (int t = 0; t < 4; t++) {
+                int f = i + t;
+
+                Button button = new Button();
+                button.setText("kak");
+                //Create event handler
+                button.setOnAction((event) -> {
+                    if (button.getText().equals("kak")) {
+                        button.setText(game.taulukko.get(f));
+                    } else {
+                        button.setText("kak");
+                    }
+
+                });
+                buttonContainer[i][t] = button;//Add the current button to the Button 2D array
+                vbox.getChildren().add(buttonContainer[i][t]);//Add current button to the VBox
+            }
         }
+
+        StackPane root = new StackPane();
+
+        root.getChildren()
+                .add(vbox);
+        Scene scene = new Scene(root, 500, 500);
 
         Scene first = new Scene(firstPlayer);
         Scene second = new Scene(secondPlayer);
-        Scene gameview = new Scene(game);
 
-        but1.setOnAction((event) -> {
-            ikkuna.setScene(second);
-        });
-        but2.setOnAction((event) -> {
-            ikkuna.setScene(gameview);
-        });
+        but1.setOnAction(
+                (event) -> {
+                    ikkuna.setScene(second);
+                }
+        );
+        but2.setOnAction(
+                (event) -> {
+                    ikkuna.setScene(scene);
+                }
+        );
 
         ikkuna.setScene(first);
+
         ikkuna.show();
     }
 
