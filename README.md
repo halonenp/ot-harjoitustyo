@@ -1,6 +1,6 @@
 ## Ohjelmistotekniikka, harjoitustyö, muistipeli
 
-#Dokumentaatio
+# Dokumentaatio
 
 [Työaikakirjanpito](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Ty%C3%B6aikakirjanpito.md)
 ***
