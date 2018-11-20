@@ -17,7 +17,7 @@ public class Game {
 
     Cards card;
     private Cards[][] cards;
-    List<String> taulukko;
+    public List<String> taulukko;
 
     public Game() {
         this.taulukko = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Game {
 //    }
 
     public void fill() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 2; i++) {
             this.taulukko.add("karhu");
             this.taulukko.add("mursu");
             this.taulukko.add("norsu");
