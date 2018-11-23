@@ -8,6 +8,7 @@ package Pairs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -45,9 +46,14 @@ public class Game {
         Collections.shuffle(taulukko);
     }
 
-    public void EnumTest(Cards card) {
-        this.card = card;
+    public void turnCard(Button b, int i) {
+        b.setText(this.taulukko.get(i));
     }
-}
 
-   
+    public void notPairs(String b, String c) {
+        if (!b.equals(c)) {
+            
+        }
+    }
+    
+}
