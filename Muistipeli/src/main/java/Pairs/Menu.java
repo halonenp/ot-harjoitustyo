@@ -8,6 +8,7 @@ package Pairs;
 import java.util.ArrayList;
 import java.util.Timer;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -35,6 +36,12 @@ public class Menu extends Application {
     public int k = 0;
     public int kortti1 = 0;
     public int kortti2 = 0;
+    public String text = "";
+    public Button eka;
+    public Button toka;
+    String name1 = "";
+    String name2;
+    Players player1 = new Players("jallu");
 
     @Override
     public void start(Stage ikkuna) throws Exception {
@@ -43,14 +50,20 @@ public class Menu extends Application {
         game.fill();
 
         GridPane firstPlayer = new GridPane();
+        TextField text1 = new TextField();
         Button but1 = new Button("Seuraava");
         firstPlayer.add(but1, 0, 2);
-        luoNakuna(firstPlayer, "Pelaajan 1 nimi");
+        luoNakuna(firstPlayer, "Pelaajan 1 nimi", text1);
+        but1.setOnAction(action -> {
+            player1.setName(text1.getText());
+            System.out.println("kakke");
+        });
 
         GridPane secondPlayer = new GridPane();
         Button but2 = new Button("Oispa kaljaa");
         secondPlayer.add(but2, 0, 2);
-        luoNakuna(secondPlayer, "Pelaajan 2 nimi");
+        TextField text2 = new TextField();
+        luoNakuna(secondPlayer, "Pelaajan 2 nimi", text2);
 
         Button[] buttonContainer = new Button[8];
 
@@ -59,7 +72,7 @@ public class Menu extends Application {
         for (int i = 0; i < 8; i++) {
 
             int f = i;
-
+            System.out.println(player1.getName());
             Button button = new Button();
             button.setText("kak");
 
@@ -89,10 +102,19 @@ public class Menu extends Application {
 //            });
             button.setOnAction((event) -> {
                 if (button.getText().equals("kak")) {
-                    button.setText(game.taulukko.get(f));
-                    k++;
-                    System.out.println(k);
-
+                    if (k % 2 == 0) {
+                        game.turnCard(button, f);
+                        eka = (Button) event.getSource();
+                        k++;
+                        System.out.println(player1.getName());
+                    } else {
+                        game.turnCard(button, f);
+                        toka = (Button) event.getSource();
+                        game.checkIfPairs(eka, toka);
+                        k--;
+                    }
+                } else {
+                    return;
                 }
 
             });
@@ -127,12 +149,10 @@ public class Menu extends Application {
         ikkuna.show();
     }
 
-    private GridPane luoNakuna(GridPane asettelu, String kak) {
+    private GridPane luoNakuna(GridPane asettelu, String kak, TextField text) {
 
-        TextField text = new TextField();
         asettelu.add(new Label(kak), 0, 0);
         asettelu.add(text, 0, 1);
-
         asettelu.setPrefSize(300, 180);
         asettelu.setAlignment(Pos.CENTER);
         asettelu.setVgap(10);

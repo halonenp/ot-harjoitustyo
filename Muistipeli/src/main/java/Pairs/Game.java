@@ -8,7 +8,9 @@ package Pairs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
+import javafx.util.Duration;
 
 /**
  *
@@ -52,8 +54,34 @@ public class Game {
 
     public void notPairs(String b, String c) {
         if (!b.equals(c)) {
-            
+
         }
     }
-    
+
+    public void olutta(Button b) {
+
+        System.out.println("jahnas");
+
+    }
+
+    public void checkIfPairs(Button b, Button c) {
+
+        if (b.getText().equals(c.getText())) {
+            System.out.println("pari!");
+
+        } else {
+            PauseTransition pause = new PauseTransition(
+                    Duration.seconds(1)
+            );
+            pause.setOnFinished(even -> {
+                b.setText("kak");
+                c.setText("kak");
+
+            });
+            pause.play();
+
+        }
+
+    }
+
 }
