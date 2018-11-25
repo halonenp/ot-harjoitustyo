@@ -5,8 +5,6 @@
  */
 package Pairs;
 
-import javafx.scene.control.TextField;
-
 /**
  *
  * @author halon
@@ -27,5 +25,13 @@ public class Players {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getNumberOfPairs() {
+        return String.valueOf(this.pairs);
+    }
+
+    public void itsAMatch() {
+        this.pairs++;
     }
 }

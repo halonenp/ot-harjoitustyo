@@ -21,22 +21,11 @@ public class Game {
     Cards card;
     private Cards[][] cards;
     public List<String> taulukko;
+    Players players;
 
     public Game() {
         this.taulukko = new ArrayList<>();
     }
-//
-//    public Game() {
-//        this.cards = new Cards[2][8];
-//
-//        for (int j = 0; j < 8; j++) {
-//            this.cards[1][j] = Cards.AA;
-//        }
-//        for (int i = 0; i < 8; i++) {
-//            this.cards[2][i] = Cards.PIILO;
-//        }
-//
-//    }
 
     public void fill() {
         for (int i = 0; i < 2; i++) {
@@ -52,36 +41,26 @@ public class Game {
         b.setText(this.taulukko.get(i));
     }
 
-    public void notPairs(String b, String c) {
-        if (!b.equals(c)) {
-
-        }
-    }
-
-    public void olutta(Button b) {
-
-        System.out.println("jahnas");
-
-    }
-
-    public void checkIfPairs(Button b, Button c) {
+    public void checkIfPairs(Button b, Button c, Players p) {
 
         if (b.getText().equals(c.getText())) {
             System.out.println("pari!");
-
+            p.itsAMatch();
         } else {
-            PauseTransition pause = new PauseTransition(
-                    Duration.seconds(1)
-            );
-            pause.setOnFinished(even -> {
-                b.setText("kak");
-                c.setText("kak");
-
-            });
-            pause.play();
-
+            turnBack(b, c);
         }
+    }
 
+    public void turnBack(Button b, Button c) {
+        PauseTransition pause = new PauseTransition(
+                Duration.seconds(1)
+        );
+        pause.setOnFinished(even -> {
+            b.setText("kak");
+            c.setText("kak");
+
+        });
+        pause.play();
     }
 
 }

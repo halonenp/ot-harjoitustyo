@@ -21,7 +21,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -42,6 +44,7 @@ public class Menu extends Application {
     String name1 = "";
     String name2;
     Players player1 = new Players("jallu");
+    Players player2 = new Players("");
 
     @Override
     public void start(Stage ikkuna) throws Exception {
@@ -54,10 +57,6 @@ public class Menu extends Application {
         Button but1 = new Button("Seuraava");
         firstPlayer.add(but1, 0, 2);
         luoNakuna(firstPlayer, "Pelaajan 1 nimi", text1);
-        but1.setOnAction(action -> {
-            player1.setName(text1.getText());
-            System.out.println("kakke");
-        });
 
         GridPane secondPlayer = new GridPane();
         Button but2 = new Button("Oispa kaljaa");
@@ -68,49 +67,26 @@ public class Menu extends Application {
         Button[] buttonContainer = new Button[8];
 
         VBox vbox = new VBox();
-        System.out.println(k);
+
+        Label p1Points = new Label(player1.getNumberOfPairs());
+
         for (int i = 0; i < 8; i++) {
 
             int f = i;
-            System.out.println(player1.getName());
             Button button = new Button();
             button.setText("kak");
 
-            //Create event handler
-//            button.setOnAction(new EventHandler<ActionEvent>() {
-//                @Override
-//                public void handle(ActionEvent event) {
-//
-//                    if (k % 2 == 0) {
-//                        game.turnCard(button, f);
-//                        System.out.println("perkele");
-//                        k++;
-//                        kortti1 = f;
-//                        System.out.println(kortti1);
-//
-//                    } else {
-//                        game.turnCard(button, f);
-//                        System.out.println("saatana");
-//                        k++;
-//                        kortti2 = f;
-//                        System.out.println(kortti2);
-//                        wit();
-//                        
-//                    }
-//                }
-//              
-//            });
             button.setOnAction((event) -> {
                 if (button.getText().equals("kak")) {
                     if (k % 2 == 0) {
                         game.turnCard(button, f);
                         eka = (Button) event.getSource();
                         k++;
-                        System.out.println(player1.getName());
                     } else {
                         game.turnCard(button, f);
                         toka = (Button) event.getSource();
-                        game.checkIfPairs(eka, toka);
+                        game.checkIfPairs(eka, toka, player1);
+                        p1Points.setText(player1.getNumberOfPairs());
                         k--;
                     }
                 } else {
@@ -124,10 +100,11 @@ public class Menu extends Application {
 
         }
 
-        StackPane root = new StackPane();
+        GridPane root = new GridPane();
 
-        root.getChildren()
-                .add(vbox);
+        root.add(p1Points, 200, 200);
+        root.getChildren().add(vbox);
+
         Scene scene = new Scene(root, 300, 300);
 
         Scene first = new Scene(firstPlayer);
@@ -135,18 +112,26 @@ public class Menu extends Application {
 
         but1.setOnAction(
                 (event) -> {
+                    player1.setName(text1.getText());
                     ikkuna.setScene(second);
+                    Label tesi1 = new Label(player1.getName());
+                    root.add(tesi1, 200, 50);
                 }
         );
         but2.setOnAction(
                 (event) -> {
+                    player2.setName(text2.getText());
                     ikkuna.setScene(scene);
+                    Label tesi2 = new Label(player2.getName());
+                    root.add(tesi2, 100, 20);
+
                 }
         );
 
         ikkuna.setScene(first);
 
         ikkuna.show();
+
     }
 
     private GridPane luoNakuna(GridPane asettelu, String kak, TextField text) {
