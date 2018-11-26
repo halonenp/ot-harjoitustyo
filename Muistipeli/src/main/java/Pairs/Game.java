@@ -18,13 +18,17 @@ import javafx.util.Duration;
  */
 public class Game {
 
-    Cards card;
-    private Cards[][] cards;
     public List<String> taulukko;
     Players players;
+    int vuoro;
 
     public Game() {
         this.taulukko = new ArrayList<>();
+        this.vuoro = 0;
+    }
+
+    public int getVuoro() {
+        return this.vuoro;
     }
 
     public void fill() {
@@ -46,8 +50,10 @@ public class Game {
         if (b.getText().equals(c.getText())) {
             System.out.println("pari!");
             p.itsAMatch();
+
         } else {
             turnBack(b, c);
+            this.vuoro++;
         }
     }
 
@@ -61,6 +67,14 @@ public class Game {
 
         });
         pause.play();
+    }
+
+    public Players whosTurn(Players first, Players second) {
+        if (this.vuoro % 2 == 0) {
+            return first;
+        } else {
+            return second;
+        }
     }
 
 }

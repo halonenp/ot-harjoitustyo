@@ -36,7 +36,7 @@ import javafx.util.Duration;
 public class Menu extends Application {
 
     public int k = 0;
-    public int kortti1 = 0;
+
     public int kortti2 = 0;
     public String text = "";
     public Button eka;
@@ -69,6 +69,7 @@ public class Menu extends Application {
         VBox vbox = new VBox();
 
         Label p1Points = new Label(player1.getNumberOfPairs());
+        Label p2Points = new Label(player2.getNumberOfPairs());
 
         for (int i = 0; i < 8; i++) {
 
@@ -85,8 +86,9 @@ public class Menu extends Application {
                     } else {
                         game.turnCard(button, f);
                         toka = (Button) event.getSource();
-                        game.checkIfPairs(eka, toka, player1);
+                        game.checkIfPairs(eka, toka, game.whosTurn(player1, player2));
                         p1Points.setText(player1.getNumberOfPairs());
+                        p2Points.setText(player2.getNumberOfPairs());
                         k--;
                     }
                 } else {
@@ -103,6 +105,7 @@ public class Menu extends Application {
         GridPane root = new GridPane();
 
         root.add(p1Points, 200, 200);
+        root.add(p2Points, 500, 200);
         root.getChildren().add(vbox);
 
         Scene scene = new Scene(root, 300, 300);
