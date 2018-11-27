@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pairs;
+package muistipeli.logics;
 
+import muistipeli.players.Players;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,21 +14,19 @@ import javafx.scene.control.Button;
 import javafx.util.Duration;
 
 /**
- *
  * @author halon
  */
 public class Game {
 
-    public List<String> taulukko;
-    Players players;
-    int vuoro;
+    public final List<String> taulukko;
+    private int vuoro; 
 
-    public Game() {
+    public Game() { 
         this.taulukko = new ArrayList<>();
         this.vuoro = 0;
     }
 
-    public int getVuoro() {
+    final int getVuoro() {
         return this.vuoro;
     }
 
@@ -41,11 +40,11 @@ public class Game {
         Collections.shuffle(taulukko);
     }
 
-    public void turnCard(Button b, int i) {
+    public void turnCard(final Button b, final int i) {
         b.setText(this.taulukko.get(i));
     }
 
-    public void checkIfPairs(Button b, Button c, Players p) {
+    public void checkIfPairs(final Button b, final Button c, final Players p) {
 
         if (b.getText().equals(c.getText())) {
             System.out.println("pari!");
@@ -57,7 +56,7 @@ public class Game {
         }
     }
 
-    public void turnBack(Button b, Button c) {
+    public void turnBack(final Button b, final Button c) {
         PauseTransition pause = new PauseTransition(
                 Duration.seconds(1)
         );
@@ -69,7 +68,7 @@ public class Game {
         pause.play();
     }
 
-    public Players whosTurn(Players first, Players second) {
+    public Players whosTurn(final Players first, final Players second) {
         if (this.vuoro % 2 == 0) {
             return first;
         } else {

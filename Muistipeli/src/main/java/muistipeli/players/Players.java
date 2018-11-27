@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pairs;
+package muistipeli.players;
 
 /**
  *
@@ -14,13 +14,13 @@ public class Players {
     String name;
     int pairs;
 
-    public Players(String name) {
-        this.name = name;
+    public Players(final String n) {
+        this.name = n;
         this.pairs = 0;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(final String n) {
+        this.name = n;
     }
 
     public String getName() {

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pairs;
+package muistipeli.ui;
 
+import muistipeli.logics.Game;
+import muistipeli.players.Players;
 import java.util.ArrayList;
 import java.util.Timer;
 import javafx.animation.FadeTransition;
@@ -33,7 +35,7 @@ import javafx.util.Duration;
  *
  * @author halon
  */
-public class Menu extends Application {
+public class UserInterface extends Application {
 
     public int k = 0;
 
