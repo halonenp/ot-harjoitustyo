@@ -8,3 +8,4 @@
 * 24.11.2018 2h Kortit saatu toimivaksi
 * 25.11.2018 1h Peli laskee löydettyjä pareja ja ui:n kehitystä
 * 26.11.2018 1h Peli laskee pareja oikein
+* 27.11.2018 2h Pakkausrakennetta siistitty. Testejä paranneltu. CheckStyle otettu käyttöön, ui:ta ei saatu supressattua ja huomautuksia muutenkin liikaa.
