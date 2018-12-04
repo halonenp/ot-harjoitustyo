@@ -19,12 +19,28 @@ public class Players {
         this.pairs = 0;
     }
 
-    public void setName(final String n) {
-        this.name = n;
+    public void setName1(final String n) {
+        if (n.isEmpty() || n.equals(" ")) {
+            this.name = "Pelaaja 1";
+        } else {
+            this.name = n;
+        }
+    }
+
+    public void setName2(final String n) {
+        if (n.isEmpty() || n.equals(" ")) {
+            this.name = "Pelaaja 2";
+        } else {
+            this.name = n;
+        }
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public int getIntNumebrOfPairs() {
+        return this.pairs;
     }
 
     public String getNumberOfPairs() {
