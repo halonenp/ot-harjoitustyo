@@ -8,6 +8,8 @@
 
 [Arkkitehtuuri](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Release 1](https://github.com/halonenp/ot-harjoitustyo/releases)
+
 
 
 
