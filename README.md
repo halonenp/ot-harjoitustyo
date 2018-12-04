@@ -1,4 +1,6 @@
-# Ohjelmistotekniikka, harjoitustyö, muistipeli
+# Ohjelmistotekniikka, harjoitustyö, Muistipeli
+
+Sovellus on muistipeli, jossa kaksi pelaajaa pelaavat vastaikkain.
 
 ## Dokumentaatio
 
