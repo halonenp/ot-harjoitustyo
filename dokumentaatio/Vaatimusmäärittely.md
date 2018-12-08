@@ -5,7 +5,7 @@
 Sovellus on muistipeli, jossa on kaksi pelaajaa vastakkain. Peliä pelataan 16 kortilla eli 8 parilla. 
 
 ## Perusversion tarjoama toiminnallisuus
-Sovellus koostuu kahdesta eri näkymästä: Aloitusnäkymästä ja pelinäkymästä.
+Sovellus koostuu kolmesta eri näkymästä: Pelaajien 1 ja 2 nimienasetus-näkymistä sekä pelinäkymästä.
 ### Ennen peliä 
 
 * Pelaajat kirjoittavat nimensä
@@ -17,6 +17,7 @@ Sovellus koostuu kahdesta eri näkymästä: Aloitusnäkymästä ja pelinäkymäs
 * Pelaaja kääntää kaksi korttia, jos korteissa on eri kuva, niin kortit kääntyvät takaisin. Vuoro vaihtuu toiselle pelaajalle 
 * Jos käännetyissä korteissa on sama kuva, niin pelaaja saa parin itselleen. Pelaaja saa jatkaa vuoroaan
 * Kun kaikki parit ovat löydetty, peli ilmoittaa voittajan ja, että peli on loppunut. Eniten pareja kerännyt pelaaja voittaa
+* Pelin päätyttyä on mahdollisuus aloittaa uusi peli
 
 ## Jatkokehitysideoita
 
