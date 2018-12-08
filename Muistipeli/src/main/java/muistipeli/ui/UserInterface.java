@@ -7,36 +7,28 @@ package muistipeli.ui;
 
 import muistipeli.logics.Game;
 import muistipeli.players.Players;
-import java.util.ArrayList;
-import java.util.Timer;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-//todo: kumman vuoro, uusi peli -nappula aloittaa uuden pelin, korttien määrä vaihdettavissa
+//todo: uusi peli -nappula aloittaa uuden pelin
+
 /**
  *
  * @author halon
  */
 public class UserInterface extends Application {
 
+    public int t; //pelin koko
     public int k = 0; //määrittää onko kortin kääntö eka vai toka
     public Button eka;
     public Button toka;
@@ -60,54 +52,37 @@ public class UserInterface extends Application {
         TextField text2 = new TextField();
         luoNakuna(secondPlayer, "Pelaajan 2 nimi", text2);//tokan pelaajan näkymä
 
-        Button[] buttonContainer = new Button[8];
+        ToggleGroup butGroup = new ToggleGroup();
+        RadioButton butEasy = new RadioButton("Helppo");
+        butEasy.setToggleGroup(butGroup);
+        butEasy.setSelected(true);
+        RadioButton butNormal = new RadioButton("Normaali");
+        butNormal.setToggleGroup(butGroup);
+        RadioButton butHard = new RadioButton("Vaikea");
+        butHard.setToggleGroup(butGroup);
+
+        VBox butStack = new VBox();
+        butStack.setSpacing(2);
+        butStack.getChildren().add(butEasy);
+        butStack.getChildren().add(butNormal);
+        butStack.getChildren().add(butHard);
+        secondPlayer.add(butStack, 0, 5);//Vaikeusasteen valinta
 
         VBox vbox = new VBox();
 
+        Label turn1 = new Label("  <--Vuoro");
+        Label turn2 = new Label("  <--Vuoro");
+        turn2.setVisible(false);
         Label p1Points = new Label(player1.getNumberOfPairs());
         Label p2Points = new Label(player2.getNumberOfPairs());
         Label winner = new Label("");
         Button newGame = new Button("Uusi peli");
         newGame.setVisible(false);
 
-        for (int i = 0; i < 8; i++) {//itse peli ja napit tässä loopissa
-
-            int f = i;
-            Button button = new Button();
-            button.setText("***");
-
-            button.setOnAction((ActionEvent event) -> {
-
-                if (button.getText().equals("***")) {
-                    if (k % 2 == 0) {
-                        game.turnCard(button, f);
-                        eka = (Button) event.getSource();
-                        k++;
-                    } else {
-                        game.turnCard(button, f);
-                        toka = (Button) event.getSource();
-                        game.checkIfPairs(eka, toka, game.whosTurn(player1, player2));//tarkistaa löytyikö pari sekä
-                        p1Points.setText(player1.getNumberOfPairs());                 //lisää pisteen oikealle pelaajalle jos löytyi
-                        p2Points.setText(player2.getNumberOfPairs());
-                        k--;
-                        if (game.checkGameOver(player1, player2)) {         //Jos peli on loppu
-                            game.checkWinner(player1, player2, winner);     //julista voittaja
-                            newGame.setVisible(true);                       //uusi peli -nappi näkyviin (ei tee vielä mitään)
-                        }
-                    }
-                } else {
-                    return;//return varmistaa ettei voi painaa jo auki olevia nappeja
-                }
-
-            });
-
-            buttonContainer[i] = button;//lisää nappi arryhin
-            vbox.getChildren().add(buttonContainer[i]);//lisää napit vboxiin
-
-        }
-
         GridPane root = new GridPane();
         //root.setPrefSize(500, 500);
+        root.add(turn1, 110, 20);
+        root.add(turn2, 110, 50);
         root.add(p1Points, 2, 20);
         root.add(p2Points, 2, 50);
         root.add(winner, 120, 600);
@@ -127,14 +102,29 @@ public class UserInterface extends Application {
                     root.add(tesi1, 100, 20);
                 }
         );
-        but2.setOnAction(
-                (event) -> {
-                    player2.setName2(text2.getText());
-                    ikkuna.setScene(scene);
-                    Label tesi2 = new Label("  " + player2.getName());
-                    root.add(tesi2, 100, 50);
-                    game.fill();
-                }
+        but2.setOnAction((event) -> {
+
+            player2.setName2(text2.getText());
+            ikkuna.setScene(scene);
+            Label tesi2 = new Label("  " + player2.getName());
+            root.add(tesi2, 100, 50);
+            if (butGroup.getSelectedToggle() == butEasy) {
+                t = 6;
+                game.fillEasy();
+                board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+            }
+            if (butGroup.getSelectedToggle() == butNormal) {
+                t = 8;
+                game.fill();
+                board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+            }
+            if (butGroup.getSelectedToggle() == butHard) {
+                t = 12;
+                game.fillHard();
+                board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+            }
+
+        }
         );
 
         ikkuna.setScene(first);
@@ -152,6 +142,46 @@ public class UserInterface extends Application {
         asettelu.setHgap(10);
         asettelu.setPadding(new Insets(20, 20, 20, 20));
         return asettelu;
+    }
+
+    private void board(Game game, Label p1Points, Label p2Points, Label turn1, Label turn2, Label winner, Button newGame, VBox vbox) {
+        Button[] buttonContainer = new Button[t];
+        for (int i = 0; i < t; i++) {//itse peli ja napit tässä loopissa
+
+            int f = i;
+            Button button = new Button();
+            button.setText("***");
+
+            button.setOnAction((ActionEvent event) -> {
+
+                if (button.getText().equals("***")) {
+                    if (k % 2 == 0) {
+                        game.turnCard(button, f);
+                        eka = (Button) event.getSource();
+                        k++;
+                    } else {
+                        game.turnCard(button, f);
+                        toka = (Button) event.getSource();
+                        game.checkIfPairs(eka, toka, game.whosTurn(player1, player2));//tarkistaa löytyikö pari sekä
+                        p1Points.setText(player1.getNumberOfPairs());                 //lisää pisteen oikealle pelaajalle jos löytyi
+                        p2Points.setText(player2.getNumberOfPairs());
+                        k--;
+                        game.showTurn(turn1, turn2);
+                        if (game.checkGameOver(player1, player2)) {         //Jos peli on loppu
+                            game.checkWinner(player1, player2, winner);     //julista voittaja
+                            newGame.setVisible(true);                       //uusi peli -nappi näkyviin (ei tee vielä mitään)
+                        }
+                    }
+                } else {
+                    return;//return varmistaa ettei voi painaa jo auki olevia nappeja
+                }
+
+            });
+
+            buttonContainer[i] = button;//lisää nappi arryhin
+            vbox.getChildren().add(buttonContainer[i]);//lisää napit vboxiin
+
+        }
     }
 
 }

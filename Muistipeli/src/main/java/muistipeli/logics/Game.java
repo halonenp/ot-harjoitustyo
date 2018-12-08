@@ -27,12 +27,33 @@ public class Game {
         this.vuoro = 0;
     }
 
+    public void fillEasy() {
+        for (int i = 0; i < 2; i++) {
+            this.taulukko.add("karhu");
+            this.taulukko.add("mursu");
+            this.taulukko.add("sandels");
+        }
+        Collections.shuffle(taulukko);
+    }
+
     public void fill() {
         for (int i = 0; i < 2; i++) {
             this.taulukko.add("karhu");
             this.taulukko.add("mursu");
             this.taulukko.add("norsu");
             this.taulukko.add("sandels");
+        }
+        Collections.shuffle(taulukko);
+    }
+
+    public void fillHard() {
+        for (int i = 0; i < 2; i++) {
+            this.taulukko.add("karhu");
+            this.taulukko.add("mursu");
+            this.taulukko.add("sandels");
+            this.taulukko.add("koff");
+            this.taulukko.add("jallu");
+            this.taulukko.add("maito");
         }
         Collections.shuffle(taulukko);
     }
@@ -73,8 +94,19 @@ public class Game {
         }
     }
 
+    public void showTurn(Label p1, Label p2) {
+        if (this.vuoro % 2 == 0) {
+            p2.setVisible(false);
+            p1.setVisible(true);
+        } else {
+            p1.setVisible(false);
+            p2.setVisible(true);
+        }
+
+    }
+
     public boolean checkGameOver(Players fir, Players sec) {
-        if (fir.getIntNumebrOfPairs() + sec.getIntNumebrOfPairs() == 4) {
+        if (fir.getIntNumebrOfPairs() + sec.getIntNumebrOfPairs() == taulukko.size() / 2) {
 
             return true;
         } else {
