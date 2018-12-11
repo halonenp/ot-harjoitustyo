@@ -10,6 +10,8 @@ Sovellus on muistipeli, jossa kaksi pelaajaa pelaavat vastaikkain.
 
 [Arkkitehtuuri](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+[Käyttöohje](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Kayttoohje.md)
+
 [Release 1](https://github.com/halonenp/ot-harjoitustyo/releases)
 
 ## Komentorivitoiminnot
@@ -33,6 +35,12 @@ generoi hakemistoon target suoritettavan jar-tiedoston Muistipeli-1.0-SNAPSHOT.j
 Tiedostoon checkstyle.xml määrittelemät tarkistukset suoritetaan komennolla *mvn jxr:jxr checkstyle:checkstyle*
 
 Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto target/site/checkstyle.html
+
+### JavaDoc
+
+JavaDoc generoidaan komennolla *mvn javadoc:javadoc*
+
+JavaDocia voi tarkastella avaamalla selaimella tiedosto target/site/apidocs/index.html
 
 
 
