@@ -12,7 +12,9 @@ Sovellus on muistipeli, jossa kaksi pelaajaa pelaavat vastaikkain.
 
 [Käyttöohje](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Kayttoohje.md)
 
-[Release 1](https://github.com/halonenp/ot-harjoitustyo/releases)
+[Release 1](https://github.com/halonenp/ot-harjoitustyo/releases/tag/Viikko5)
+
+[Release 2](https://github.com/halonenp/ot-harjoitustyo/releases/tag/Viikko6)
 
 ## Komentorivitoiminnot
 
