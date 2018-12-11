@@ -28,4 +28,4 @@ Painikkeet kuvaavat käännettäviä kortteja. Jos painikkeessa on kolme tähte�
 Pelaajan tehtävänä on löytää painikkeista pareja. Painamalla painiketta, jossa on tähtiä, paljastuu teksti. Painamalla toista tähdellistä painiketta paljastuu toisen painikkeen teksti. Jos painikkeissa on sama teksti, niin pelaaja saa pisteen, muuten painikkeiden tekstit ovat näkyvillä sekuntin kunnes tekstit muuttuvat taas tähdiksi. Parin löydettäsessä pelaaja jatkaa vuoroaan, muuten vuoro vaihtuu. Peli loppuu kun kaikki parit ovat löydetty ja voittaja on eniten pisteitä omaava pelaaja. 
 
 
-Näkymässä näkyy pelaajien pisteet, jotka alkavat nollasta. Nuoli osoittaa kumman pelaajan vuoro on sillä hetkellä. Peli alkaa ensimmäisen pelaajan vuorolla.
+Näkymässä näkyy pelaajien pisteet, jotka alkavat nollasta. Nuoli osoittaa kumman pelaajan vuoro on sillä hetkellä. Peli alkaa ensimmäisen pelaajan vuorolla. Pelin loputtua näkymään tulee Uusi Peli! -painike, jota painamalla alkaa uusi peli.
