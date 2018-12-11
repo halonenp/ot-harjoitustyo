@@ -13,5 +13,6 @@
 * 4.12.2018 2h UI:ta paranneltu. Testejä kehitetty. Jar-tiedosto lisätty.
 * 7.12.2018 1h Peli kertoo kumman vuoro on kyseessä
 * 8.12.2018 1h Korttien määrä eli vaikeusaste valittavissa kolmesta vaihtoehdosta
+* 11.12.2018 1h Testien kehitystä ja JavaDoc-kommentointia
 
-## Yhteensä 21h
+## Yhteensä 22h
