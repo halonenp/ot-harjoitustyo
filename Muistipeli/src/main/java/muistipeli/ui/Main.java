@@ -8,13 +8,18 @@ package muistipeli.ui;
 import static javafx.application.Application.launch;
 
 /**
+ * Luokka ohjelman käynnistykseen
  *
  * @author halon
  */
 public class Main {
 
+    /**
+     * Käynnistää ohjelman
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         launch(UserInterface.class);
     }
 }

@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 //todo: uusi peli -nappula aloittaa uuden pelin
 
 /**
+ * UI
  *
  * @author halon
  */
@@ -47,7 +48,7 @@ public class UserInterface extends Application {
         luoNakuna(firstPlayer, "Pelaajan 1 nimi", text1);//ekan pelaajan näkymä
 
         GridPane secondPlayer = new GridPane();
-        Button but2 = new Button("Oispa kaljaa");
+        Button but2 = new Button("Pelaamaan!");
         secondPlayer.add(but2, 0, 2);
         TextField text2 = new TextField();
         luoNakuna(secondPlayer, "Pelaajan 2 nimi", text2);//tokan pelaajan näkymä
@@ -132,7 +133,15 @@ public class UserInterface extends Application {
 
     }
 
-    private GridPane luoNakuna(GridPane asettelu, String kak, TextField text) {//tämä metodi asettelee pelaajien näkymät
+    /**
+     * Tämä metodi asettelee pelaajien nimienasetusnäkymät
+     *
+     * @param asettelu
+     * @param kak teksti kumman pelaajan nimi tulee
+     * @param text textfield
+     * @return palauttaa asettelun
+     */
+    private GridPane luoNakuna(GridPane asettelu, String kak, TextField text) {
 
         asettelu.add(new Label(kak), 0, 0);
         asettelu.add(text, 0, 1);
@@ -144,9 +153,21 @@ public class UserInterface extends Application {
         return asettelu;
     }
 
+    /**
+     * Tässä metodissa itse peli
+     *
+     * @param game Game-olio
+     * @param p1Points label pelaajan1 pisteille
+     * @param p2Points label pelaajan2 pisteille
+     * @param turn1 label pelaajan1 vuorolle
+     * @param turn2 label pelaajan2 vuorolle
+     * @param winner label voittajan julistukseen
+     * @param newGame uusi peli -nappula
+     * @param vbox napit tässä vboxissa
+     */
     private void board(Game game, Label p1Points, Label p2Points, Label turn1, Label turn2, Label winner, Button newGame, VBox vbox) {
         Button[] buttonContainer = new Button[t];
-        for (int i = 0; i < t; i++) {//itse peli ja napit tässä loopissa
+        for (int i = 0; i < t; i++) {
 
             int f = i;
             Button button = new Button();

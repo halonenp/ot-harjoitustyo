@@ -15,18 +15,23 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 /**
+ * Luokka koko pelin logiikkaan
+ *
  * @author halon
  */
 public class Game {
 
     public final List<String> taulukko;
-    private int vuoro;
+    public int vuoro;
 
     public Game() {
         this.taulukko = new ArrayList<>();
         this.vuoro = 0;
     }
 
+    /**
+     * Fill-metodit täyttävät pelilaudan, yksi kullekin vaikeusasteelle
+     */
     public void fillEasy() {
         for (int i = 0; i < 2; i++) {
             this.taulukko.add("karhu");
@@ -58,23 +63,49 @@ public class Game {
         Collections.shuffle(taulukko);
     }
 
+    /**
+     * Tyhjentää pelilaudan uutta peliä aloittaessa
+     */
+    public void clearGame() {
+        this.taulukko.clear();
+    }
+
+    /**
+     * kääntää kortin
+     *
+     * @param b käyttäjän painama nappi
+     * @param i kortin paikka taulukossa
+     */
     public void turnCard(final Button b, final int i) {
         b.setText(this.taulukko.get(i));
     }
 
-    public void checkIfPairs(final Button b, final Button c, final Players p) {
+    /**
+     * Metodi tarkistaa löytyikö pari, jos löytyi lisää vuorossa olevalle
+     * pelaajalle piste, muuten käännä takaisin ja vuoro vaihtuu
+     *
+     * @param b käyttäjän valitsema kortti
+     * @param c käyttäjän valitsema kortti
+     * @param p vuorossa oleva pelaaja
+     */
+    public void checkIfPairs(Button b, Button c, Players p) {
 
         if (b.getText().equals(c.getText())) {
-            System.out.println("pari!");
-            p.itsAMatch();//jos löytyi pari lisää piste oikealle pelaajalle
+            p.itsAMatch();
 
         } else {
             turnBack(b, c);
-            this.vuoro++;//paria ei löytynyt niin vaihda vuoroa
+            this.vuoro++;
         }
     }
 
-    public void turnBack(final Button b, final Button c) {//kääntää kortit takaisin tauon jälkeen
+    /**
+     * kääntää kortit takaisin piiloon
+     *
+     * @param b käyttäjän valitsema kortti
+     * @param c käyttäjän valitsema kortti
+     */
+    public void turnBack(Button b, Button c) {
         PauseTransition pause = new PauseTransition(
                 Duration.seconds(1)
         );
@@ -86,6 +117,13 @@ public class Game {
         pause.play();
     }
 
+    /**
+     * Tarkistaa kumman vuoro
+     *
+     * @param first player1
+     * @param second player2
+     * @return palauttaa vuorossa olevan pelaajan
+     */
     public Players whosTurn(final Players first, final Players second) {
         if (this.vuoro % 2 == 0) {
             return first;
@@ -94,6 +132,12 @@ public class Game {
         }
     }
 
+    /**
+     * Säätelee nuoli-labelia joka oisoittaa vuorossa olevan pelaajan
+     *
+     * @param p1 p1 vuoro-label
+     * @param p2 p2 vuoro-label
+     */
     public void showTurn(Label p1, Label p2) {
         if (this.vuoro % 2 == 0) {
             p2.setVisible(false);
@@ -105,6 +149,13 @@ public class Game {
 
     }
 
+    /**
+     * tarkistaa onko peli loppu
+     *
+     * @param fir player1
+     * @param sec player2
+     * @return true jos peli on loppu
+     */
     public boolean checkGameOver(Players fir, Players sec) {
         if (fir.getIntNumebrOfPairs() + sec.getIntNumebrOfPairs() == taulukko.size() / 2) {
 
@@ -114,21 +165,25 @@ public class Game {
         }
     }
 
+    /**
+     * Jos peli loppu, niin julistaa voittajan labelillä
+     *
+     * @param fir player1
+     * @param sec player2
+     * @param winner voittajan julistus -label
+     */
     public void checkWinner(Players fir, Players sec, Label winner) {
         if (checkGameOver(fir, sec)) {
 
             if (fir.getIntNumebrOfPairs() > sec.getIntNumebrOfPairs()) {
-                System.out.println("eka");
                 winner.setText(fir.getName() + " on voittaja!");
 
             }
             if (sec.getIntNumebrOfPairs() > fir.getIntNumebrOfPairs()) {
-                System.out.println("toka");
                 winner.setText(sec.getName() + " on voittaja!");
 
             }
             if (fir.getIntNumebrOfPairs() == sec.getIntNumebrOfPairs()) {
-                System.out.println("tasuri");
                 winner.setText("Tasapeli!");
 
             }

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import muistipeli.logics.Game;
 import muistipeli.players.Players;
+import static org.hamcrest.CoreMatchers.hasItems;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,8 +25,11 @@ public class LogicsTest {
 
     Players player1 = new Players("first");
     Players player2 = new Players("second");
+    public Button button;
+    public Button button2;
 
     public LogicsTest() {
+
     }
 
     @BeforeClass
@@ -37,7 +41,8 @@ public class LogicsTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+
     }
 
     @After
@@ -59,6 +64,37 @@ public class LogicsTest {
     }
 
     @Test
+    public void correctAmountOfCardsEasy() {
+        Game game = new Game();
+        game.fillEasy();
+        assertFalse(game.taulukko.isEmpty());
+        assertEquals(game.taulukko.size(), 6);
+    }
+
+    @Test
+    public void correctAmountOfCardsHard() {
+        Game game = new Game();
+        game.fillHard();
+        assertFalse(game.taulukko.isEmpty());
+        assertEquals(game.taulukko.size(), 12);
+    }
+
+    @Test
+    public void gameIsCleared() {
+        Game game = new Game();
+        game.fill();
+        game.clearGame();
+        assertEquals(game.taulukko.size(), 0);
+
+    }
+
+//    @Test
+//    public void gameHasPairs() {
+//        Game game = new Game();
+//        game.fill();
+//        assertThat(game.taulukko, hasItems("sandels", "sandels"));
+//    }
+    @Test
     public void cardsAreEmptyBeforeStart() {
         Game game = new Game();
         assertEquals(game.taulukko.size(), 0);
@@ -71,6 +107,14 @@ public class LogicsTest {
         assertEquals(game.whosTurn(player1, player2), player1);
 
     }
+    @Test
+    public void rightPlayersTurn2() {
+        Game game = new Game();
+        game.fill();
+        game.vuoro++;
+        assertEquals(game.whosTurn(player1, player2), player2);
+
+    }
 
     @Test
     public void gameIsNotOver() {
@@ -78,21 +122,27 @@ public class LogicsTest {
         game.fill();
         assertEquals(game.checkGameOver(player1, player2), false);
     }
+    @Test
+    public void gameIsOver() {
+        Game game = new Game();
+        game.fillEasy();
+        player1.itsAMatch();
+        player1.itsAMatch();
+        player1.itsAMatch();
+        assertEquals(game.checkGameOver(player1, player2), true);
+    }
 
 //    @Test
 //    public void cardsAreTurning() {
-//        
-//        final Button button = new Button();
-//        button.setText("kak");
-//        final Button button2 = new Button();
-//        button.setText("pis");
-//        
+//
 //        Game game = new Game();
-//        
+//
 //        game.fill();
 //        game.checkIfPairs(button, button2, player1);
 //        game.turnCard(button, 0);
+//
 //        assertEquals(button.getText(), !button.getText().equals("***"));
+//
 //    }
 //    @Test
 //    public void gameWinner() {

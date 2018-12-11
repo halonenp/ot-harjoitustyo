@@ -6,6 +6,7 @@
 package muistipeli.players;
 
 /**
+ * Luokka Pelaajien hallintaan
  *
  * @author halon
  */
@@ -19,6 +20,12 @@ public class Players {
         this.pairs = 0;
     }
 
+    /**
+     * setName-metodit asettavat nimet pelaajille, jos nimikenttä on tyhjä, niin
+     * asettaa automaattinimen
+     *
+     * @param n käyttäjän asettama nimi
+     */
     public void setName1(final String n) {
         if (n.isEmpty() || n.equals(" ")) {
             this.name = "Pelaaja 1";
@@ -43,10 +50,18 @@ public class Players {
         return this.pairs;
     }
 
+    /**
+     * palauttaa pelaajan pistemäärän stringinä
+     *
+     * @return pelaajan pistemäärän stringinä
+     */
     public String getNumberOfPairs() {
         return String.valueOf(this.pairs);
     }
 
+    /**
+     * kasvattaa pelaajan pistemäärää yhdellä
+     */
     public void itsAMatch() {
         this.pairs++;
     }
