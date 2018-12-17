@@ -64,10 +64,10 @@ public class Game {
     }
 
     /**
-     * Tyhjentää pelilaudan uutta peliä aloittaessa
+     * asettaa vuoron takaisin pelaajalle 1
      */
-    public void clearGame() {
-        this.taulukko.clear();
+    public void newGame() {
+        this.vuoro = 0;
     }
 
     /**
@@ -174,7 +174,7 @@ public class Game {
      */
     public void checkWinner(Players fir, Players sec, Label winner) {
         if (checkGameOver(fir, sec)) {
-
+            winner.setVisible(true);
             if (fir.getIntNumebrOfPairs() > sec.getIntNumebrOfPairs()) {
                 winner.setText(fir.getName() + " on voittaja!");
 

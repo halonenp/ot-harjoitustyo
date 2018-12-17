@@ -5,6 +5,7 @@
  */
 package muistipeli.ui;
 
+import java.util.Collections;
 import muistipeli.logics.Game;
 import muistipeli.players.Players;
 import javafx.application.Application;
@@ -20,7 +21,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-//todo: uusi peli -nappula aloittaa uuden pelin
 
 /**
  * UI
@@ -106,25 +106,43 @@ public class UserInterface extends Application {
         but2.setOnAction((event) -> {
 
             player2.setName2(text2.getText());
-            ikkuna.setScene(scene);
-            Label tesi2 = new Label("  " + player2.getName());
-            root.add(tesi2, 100, 50);
-            if (butGroup.getSelectedToggle() == butEasy) {
-                t = 6;
-                game.fillEasy();
-                board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
-            }
-            if (butGroup.getSelectedToggle() == butNormal) {
-                t = 8;
-                game.fill();
-                board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
-            }
-            if (butGroup.getSelectedToggle() == butHard) {
-                t = 12;
-                game.fillHard();
-                board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+            if (player1.namesDiffer(player1.getName(), player2.getName())) {
+                ikkuna.setScene(scene);
+
+                Label tesi2 = new Label("  " + player2.getName());
+                root.add(tesi2, 100, 50);
+                if (butGroup.getSelectedToggle() == butEasy) {
+                    t = 6;
+                    game.fillEasy();
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+                }
+                if (butGroup.getSelectedToggle() == butNormal) {
+                    t = 8;
+                    game.fill();
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+                }
+                if (butGroup.getSelectedToggle() == butHard) {
+                    t = 12;
+                    game.fillHard();
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+                }
             }
 
+        }
+        );
+
+        newGame.setOnAction((event) -> {
+            game.newGame();
+            Collections.shuffle(game.taulukko);
+            vbox.getChildren().clear();
+            board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+            newGame.setVisible(false);
+            winner.setVisible(false);
+            player1.newGame();
+            p1Points.setText(player1.getNumberOfPairs());
+            player2.newGame();
+            p2Points.setText(player2.getNumberOfPairs());
+            game.showTurn(turn1, turn2);
         }
         );
 

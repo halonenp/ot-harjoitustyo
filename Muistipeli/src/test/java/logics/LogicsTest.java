@@ -80,11 +80,11 @@ public class LogicsTest {
     }
 
     @Test
-    public void gameIsCleared() {
+    public void p1StartsNewGame() {
         Game game = new Game();
-        game.fill();
-        game.clearGame();
-        assertEquals(game.taulukko.size(), 0);
+        game.vuoro = 5;
+        game.newGame();
+        assertEquals((game.vuoro), 0);
 
     }
 
@@ -107,6 +107,7 @@ public class LogicsTest {
         assertEquals(game.whosTurn(player1, player2), player1);
 
     }
+
     @Test
     public void rightPlayersTurn2() {
         Game game = new Game();
@@ -122,6 +123,7 @@ public class LogicsTest {
         game.fill();
         assertEquals(game.checkGameOver(player1, player2), false);
     }
+
     @Test
     public void gameIsOver() {
         Game game = new Game();
