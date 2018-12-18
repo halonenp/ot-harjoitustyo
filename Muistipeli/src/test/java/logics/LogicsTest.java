@@ -23,8 +23,8 @@ import static org.junit.Assert.*;
  */
 public class LogicsTest {
 
-    Players player1 = new Players("first");
-    Players player2 = new Players("second");
+    Players player1 = new Players("first", 1,0);
+    Players player2 = new Players("second", 1,0);
     public Button button;
     public Button button2;
 

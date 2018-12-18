@@ -9,10 +9,14 @@ import muistipeli.players.Players;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
+import muistipeli.logics.StatisticsUusi;
+import muistipeli.ui.UserInterface;
 
 /**
  * Luokka koko pelin logiikkaan
@@ -171,16 +175,27 @@ public class Game {
      * @param fir player1
      * @param sec player2
      * @param winner voittajan julistus -label
+     * @param stats
      */
-    public void checkWinner(Players fir, Players sec, Label winner) {
+    public void checkWinner(Players fir, Players sec, Label winner, StatisticsUusi stats) {
         if (checkGameOver(fir, sec)) {
             winner.setVisible(true);
             if (fir.getIntNumebrOfPairs() > sec.getIntNumebrOfPairs()) {
                 winner.setText(fir.getName() + " on voittaja!");
+                try {
+                    stats.PointForWinner(fir);
+                } catch (Exception ex) {
+                    Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             }
             if (sec.getIntNumebrOfPairs() > fir.getIntNumebrOfPairs()) {
                 winner.setText(sec.getName() + " on voittaja!");
+                try {
+                    stats.PointForWinner(sec);
+                } catch (Exception ex) {
+                    Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             }
             if (fir.getIntNumebrOfPairs() == sec.getIntNumebrOfPairs()) {

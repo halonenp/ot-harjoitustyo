@@ -14,10 +14,15 @@ public class Players {
 
     String name;
     int pairs;
+    int victories;
+    int playedGames;
 
-    public Players(final String n) {
+    public Players(final String n, int playedGames, int victories) {
         this.name = n;
         this.pairs = 0;
+        this.victories = victories;
+        this.playedGames = playedGames;
+
     }
 
     /**
@@ -43,12 +48,14 @@ public class Players {
         }
 
     }
-/**
- * Tarkistaa että nimet eivät ole samat
- * @param n player1 nimi
- * @param m player2  nimi
- * @return true jos nimet eroavat
- */
+
+    /**
+     * Tarkistaa että nimet eivät ole samat
+     *
+     * @param n player1 nimi
+     * @param m player2 nimi
+     * @return true jos nimet eroavat
+     */
     public boolean namesDiffer(String n, String m) {
         if (!n.equalsIgnoreCase(m)) {
             return true;
@@ -62,6 +69,22 @@ public class Players {
 
     public int getIntNumebrOfPairs() {
         return this.pairs;
+    }
+
+    public int getVictories() {
+        return this.victories;
+    }
+
+    public void victory() {
+        this.victories++;
+    }
+
+    public int getPlayedGames() {
+        return this.playedGames;
+    }
+
+    public void PlayedAGame() {
+        this.playedGames++;
     }
 
     public void newGame() {

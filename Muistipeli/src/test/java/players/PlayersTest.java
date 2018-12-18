@@ -43,7 +43,7 @@ public class PlayersTest {
     public void setNameWorks1() {
         Game game = new Game();
         game.fill();
-        Players player1 = new Players("");
+        Players player1 = new Players("", 1, 0);
         String n = "peluri";
         player1.setName1(n);
         assertEquals(player1.getName(), "peluri");
@@ -53,16 +53,17 @@ public class PlayersTest {
     public void setNameWorks2() {
         Game game = new Game();
         game.fill();
-        Players player1 = new Players("");
+        Players player1 = new Players("", 1, 0);
         String n = "";
         player1.setName1(n);
         assertEquals(player1.getName(), "Pelaaja 1");
     }
-     @Test
+
+    @Test
     public void setNameWorks3() {
         Game game = new Game();
         game.fill();
-        Players player1 = new Players("");
+        Players player1 = new Players("", 1, 0);
         String n = "peluri";
         player1.setName2(n);
         assertEquals(player1.getName(), "peluri");
@@ -72,20 +73,20 @@ public class PlayersTest {
     public void setNameWorks4() {
         Game game = new Game();
         game.fill();
-        Players player1 = new Players("");
+        Players player1 = new Players("", 1, 0);
         String n = " ";
         player1.setName2(n);
         assertEquals(player1.getName(), "Pelaaja 2");
     }
+
     @Test
     public void pairFound() {
         Game game = new Game();
         game.fill();
-        Players player1 = new Players("pelaaja");
+        Players player1 = new Players("pelaaja", 1, 0);
         player1.itsAMatch();
         assertEquals(player1.getIntNumebrOfPairs(), 1);
     }
-    
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

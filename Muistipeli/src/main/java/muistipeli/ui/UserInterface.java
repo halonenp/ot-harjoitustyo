@@ -6,6 +6,8 @@
 package muistipeli.ui;
 
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import muistipeli.logics.Game;
 import muistipeli.players.Players;
 import javafx.application.Application;
@@ -21,6 +23,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import muistipeli.logics.StatisticsUusi;
 
 /**
  * UI
@@ -33,8 +36,16 @@ public class UserInterface extends Application {
     public int k = 0; //määrittää onko kortin kääntö eka vai toka
     public Button eka;
     public Button toka;
-    Players player1 = new Players("");
-    Players player2 = new Players("");
+    Players player1 = new Players("", 1, 0);
+    Players player2 = new Players("", 1, 0);
+    private StatisticsUusi stats;
+
+    @Override
+    public void init() throws Exception {
+        System.out.println("init");
+        stats = new StatisticsUusi("statistics.txt");
+
+    }
 
     @Override
     public void start(Stage ikkuna) throws Exception {
@@ -107,6 +118,11 @@ public class UserInterface extends Application {
 
             player2.setName2(text2.getText());
             if (player1.namesDiffer(player1.getName(), player2.getName())) {
+                try {
+                    stats.addTime("kak", player1, player2);
+                } catch (Exception ex) {
+                    Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 ikkuna.setScene(scene);
 
                 Label tesi2 = new Label("  " + player2.getName());
@@ -114,17 +130,17 @@ public class UserInterface extends Application {
                 if (butGroup.getSelectedToggle() == butEasy) {
                     t = 6;
                     game.fillEasy();
-                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox,stats);
                 }
                 if (butGroup.getSelectedToggle() == butNormal) {
                     t = 8;
                     game.fill();
-                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox,stats);
                 }
                 if (butGroup.getSelectedToggle() == butHard) {
                     t = 12;
                     game.fillHard();
-                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox,stats);
                 }
             }
 
@@ -135,7 +151,7 @@ public class UserInterface extends Application {
             game.newGame();
             Collections.shuffle(game.taulukko);
             vbox.getChildren().clear();
-            board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox);
+            board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox,stats);
             newGame.setVisible(false);
             winner.setVisible(false);
             player1.newGame();
@@ -143,6 +159,12 @@ public class UserInterface extends Application {
             player2.newGame();
             p2Points.setText(player2.getNumberOfPairs());
             game.showTurn(turn1, turn2);
+            try {
+                stats.addTime("kak", player1, player2);
+            } catch (Exception ex) {
+                Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
         );
 
@@ -183,7 +205,8 @@ public class UserInterface extends Application {
      * @param newGame uusi peli -nappula
      * @param vbox napit tässä vboxissa
      */
-    private void board(Game game, Label p1Points, Label p2Points, Label turn1, Label turn2, Label winner, Button newGame, VBox vbox) {
+    private void board(Game game, Label p1Points, Label p2Points, Label turn1, Label turn2, Label winner,
+            Button newGame, VBox vbox, StatisticsUusi stats) {
         Button[] buttonContainer = new Button[t];
         for (int i = 0; i < t; i++) {
 
@@ -207,7 +230,7 @@ public class UserInterface extends Application {
                         k--;
                         game.showTurn(turn1, turn2);
                         if (game.checkGameOver(player1, player2)) {         //Jos peli on loppu
-                            game.checkWinner(player1, player2, winner);     //julista voittaja
+                            game.checkWinner(player1, player2, winner,stats);     //julista voittaja
                             newGame.setVisible(true);                       //uusi peli -nappi näkyviin (ei tee vielä mitään)
                         }
                     }
