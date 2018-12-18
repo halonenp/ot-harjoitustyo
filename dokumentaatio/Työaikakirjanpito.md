@@ -14,5 +14,8 @@
 * 7.12.2018 1h Peli kertoo kumman vuoro on kyseessä
 * 8.12.2018 1h Korttien määrä eli vaikeusaste valittavissa kolmesta vaihtoehdosta
 * 11.12.2018 1h Testien kehitystä ja JavaDoc-kommentointia
+* 14.12.2018 1h Uusi peli -nappi toimii ja pelaajien nimet eivät voi olla samat
+* 17.12.2018 1h Tekstitiedostoon tallentaminen aloitettu
+* 18.12.2018 2h Ohjelma tallentaa pelaajien nimet, pelattujen pelien ja voittojen määrän tekstitiedostoon
 
-## Yhteensä 22h
+## Yhteensä 26h
