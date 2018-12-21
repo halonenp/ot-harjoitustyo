@@ -39,4 +39,4 @@ että sovelluksen hakemistossa on ja ei ole ollut tilastointiin käytettävää 
 
 Kaikki mitä [määrittelydokumentissa](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Vaatimusm%C3%A4%C3%A4rittely.md) ja [käyttöohjeessa](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Kayttoohje.md) listataan, on huomioitu. 
 . 
-Syötekenttiä on testattu tyhjillä sekä virheellisillä arvoilla. Pelin virheellisä kortin kääntöjä on testattu.
+Syötekenttiä on testattu tyhjillä sekä virheellisillä arvoilla. Pelin virheellisiä kortin kääntöjä on testattu.
