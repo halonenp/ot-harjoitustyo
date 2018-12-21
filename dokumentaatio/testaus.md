@@ -1,13 +1,13 @@
 # Testausdokumentti
 
-Ohjelmaa on testattu sekä automatisoiduin yksikkö- ja integraatiotestein JUnitilla sekä manuaalisesti tapahtunein järjestelmätason testein.
+Ohjelmaa on testattu JUnitilla sekä manuaalisesti järjestelmässä.
 
-## Yksikkö- ja integraatiotestaus
+## JUnit-testit
 
 ### Sovelluslogiikka
 
-Automatisoitujen testien ytimen moudostaa sovelluslogiikkaa, eli pakkauksen muistipeli.logics
-luokkaa testaa integraatiotesti LogicsTest.
+Testien suurin osuus koostuu sovelluksen logiikan testauksesta. Pakkauksen muistipeli.logics
+luokkaa testaa luokka LogicsTest.
 LogicsTestin määrittelevät testitapaukset simuloivat käyttöliittymän Game-olion avulla suorittamia toiminnallisuuksia.
 
 Kaikkia Game-luokan metodeita ei ole onnistuttu testaamaan. Metodit jotka ottavat parametrikseen Buttonin tai Labelin jäivät testaamatta, koska 
@@ -33,14 +33,12 @@ Sovelluksen järjestelmätestaus on suoritettu manuaalisesti.
 
 ### Asennus ja konfigurointi
 
-Sovellus on haettu ja sitä on testattu käyttöohjeen kuvaamalla tavalla Windows-ympäristössä siten,
-että sovelluksen käynnistyshakemistossa on ollut käyttöohjeen kuvauksen mukainen config.properties-tiedosto.
+Sovellus on ladattu ja sitä on testattu Windows-ympäristössä siten,
+että sovelluksen hakemistossa on ja ei ole ollut tilastointiin käytettävää statistics.txt-tiedostoa.
 
-Sovellusta on testattu sekä tilanteissa, joissa käyttäjät ja
-työt tallettavat tiedostot ovat olleet olemassa ja joissa niitä ei ole ollut jolloin ohjelma on luonut ne itse.
 
 ### Toiminnallisuus
 
 Kaikki [määrittelydokumentin](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Vaatimusm%C3%A4%C3%A4rittely.md) ja [käyttöohjeen](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Kayttoohje.md)
 listaamat toiminnallisuudet on käyty läpi. 
-Kaikkien toiminnallisuuksien yhteydessä on syötekentät yritetty täyttää myös virheellisillä arvoilla kuten tyhjillä.
+Syötekenttiä on testattu tyhjillä sekä virheellisillä arvoilla. Peliä pelatessa on testattu virheellisä kortin kääntöjä.
