@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [muistipeli.jar
+Lataa tiedosto [muistipeli.jar](https://github.com/halonenp/ot-harjoitustyo/releases/tag/vko7)
 
 ## Konfigurointi
 
