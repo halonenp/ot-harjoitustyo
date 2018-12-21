@@ -30,7 +30,7 @@ Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto target/site/jac
 
 ### Suoritettavan jarin generointi
 
-Tapahtuu komennolla *mvn javadoc:javadoc*
+Tapahtuu komennolla *mvn package*
 
 generoi hakemistoon target suoritettavan jar-tiedoston Muistipeli-1.0-SNAPSHOT.jar
 
