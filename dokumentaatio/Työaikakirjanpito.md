@@ -17,5 +17,6 @@
 * 14.12.2018 1h Uusi peli -nappi toimii ja pelaajien nimet eivät voi olla samat
 * 17.12.2018 1h Tekstitiedostoon tallentaminen aloitettu
 * 18.12.2018 2h Ohjelma tallentaa pelaajien nimet, pelattujen pelien ja voittojen määrän tekstitiedostoon
+* 21.12.2018 1h Testejä lisätty
 
-## Yhteensä 26h
+## Yhteensä 27h
