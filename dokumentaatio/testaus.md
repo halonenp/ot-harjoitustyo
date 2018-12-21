@@ -17,11 +17,11 @@ Sovelluksessa Players-olioiden logiikkaa testaa PlayersTest. PlayersTestin mää
 
 ### DAO-luokka
 
-DAO-luokan toiminta on testattu luomalla testeissä tilapäinen tiedosto hyödyntäen JUnitin TemporaryFolder-ruleja.
+DAO-luokkaa on testattu luomalla testeissä tilapäinen tiedosto hyödyntäen JUnitin TemporaryFolder-ruleja.
 
 ### Testauskattavuus
 
-Käyttöliittymää lukuunottamatta sovelluksen testauksen rivikattavuus on 73% ja haarautumakattavuus 76%
+Käyttöliittymä poislukien sovelluksen testauksen rivikattavuus on 73% ja haarautumakattavuus 76%
 
 
 <img width="752" alt="testikattavuuskuva" src="https://user-images.githubusercontent.com/39950699/50350176-f521e680-0546-11e9-983e-ebbb71794297.PNG">
@@ -40,4 +40,4 @@ että sovelluksen hakemistossa on ja ei ole ollut tilastointiin käytettävää 
 
 Kaikki mitä [määrittelydokumentissa](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Vaatimusm%C3%A4%C3%A4rittely.md) ja [käyttöohjeessa](https://github.com/halonenp/ot-harjoitustyo/blob/master/dokumentaatio/Kayttoohje.md) listataan, on huomioitu. 
 . 
-Syötekenttiä on testattu tyhjillä sekä virheellisillä arvoilla. Peliä pelatessa on testattu virheellisä kortin kääntöjä.
+Syötekenttiä on testattu tyhjillä sekä virheellisillä arvoilla. Pelin virheellisä kortin kääntöjä on testattu.
