@@ -17,8 +17,7 @@ Sovelluksessa Players-olioiden logiikkaa testaa PlayersTest. PlayersTestin mää
 
 ### DAO-luokka
 
-DAO-luokkaa on testattu luomalla testeissä tilapäinen tiedosto hyödyntäen JUnitin TemporaryFolder-ruleja.
-
+JUnitin TemporaryFolder-ruleja eli tilapäistä tiedostoa, on käytetty  DAO-luokan on testaamisessa.
 ### Testauskattavuus
 
 Käyttöliittymä poislukien sovelluksen testauksen rivikattavuus on 73% ja haarautumakattavuus 76%
