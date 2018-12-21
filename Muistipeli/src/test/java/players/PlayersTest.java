@@ -54,7 +54,7 @@ public class PlayersTest {
         Game game = new Game();
         game.fill();
         Players player1 = new Players("", 1, 0);
-        String n = "";
+        String n = " ";
         player1.setName1(n);
         assertEquals(player1.getName(), "Pelaaja 1");
     }
@@ -80,17 +80,76 @@ public class PlayersTest {
     }
 
     @Test
+    public void setNameWorks5() {
+        Game game = new Game();
+        game.fill();
+        Players player1 = new Players("", 1, 0);
+        String n = "";
+        player1.setName2(n);
+        assertEquals(player1.getName(), "Pelaaja 2");
+    }
+
+    public void setNameWorks6() {
+        Game game = new Game();
+        game.fill();
+        Players player1 = new Players("", 1, 0);
+        String n = "";
+        player1.setName1(n);
+        assertEquals(player1.getName(), "Pelaaja 1");
+    }
+
+    @Test
     public void pairFound() {
         Game game = new Game();
         game.fill();
         Players player1 = new Players("pelaaja", 1, 0);
         player1.itsAMatch();
-        assertEquals(player1.getIntNumebrOfPairs(), 1);
+        assertEquals(player1.getIntNumberOfPairs(), 1);
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void namesDiffer() {
+        Players player1 = new Players("pelaaja", 1, 0);
+        Players player2 = new Players("peluri", 1, 0);
+        assertEquals(player1.namesDiffer(player1.getName(), player2.getName()), true);
+    }
+
+    @Test
+    public void namesDoesntDiffer() {
+        Players player1 = new Players("pelaaja", 1, 0);
+        Players player2 = new Players("pelaaja", 1, 0);
+        assertEquals(player1.namesDiffer(player1.getName(), player2.getName()), false);
+    }
+
+    @Test
+    public void addsVictory() {
+        Players player1 = new Players("pelaaja", 1, 0);
+        player1.victory();
+        assertEquals(player1.getVictories(), 1);
+    }
+
+    @Test
+    public void addsPlayedGame() {
+        Players player1 = new Players("pelaaja", 1, 0);
+        player1.playedAGame();
+        assertEquals(player1.getPlayedGames(), 2);
+    }
+
+    @Test
+    public void StartNewGame() {
+        Players player1 = new Players("pelaaja", 1, 0);
+        player1.itsAMatch();
+        player1.itsAMatch();
+        player1.newGame();
+        assertEquals(player1.getIntNumberOfPairs(), 0);
+    }
+
+    @Test
+    public void correctAmountOfPairs() {
+        Players player1 = new Players("pelaaja", 1, 0);
+        player1.itsAMatch();
+        player1.itsAMatch();
+        assertEquals(player1.getNumberOfPairs(), "2");
+    }
+
 }

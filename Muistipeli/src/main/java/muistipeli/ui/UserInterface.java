@@ -23,7 +23,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import muistipeli.logics.StatisticsUusi;
+import muistipeli.dao.FileStatisticsDao;
 
 /**
  * UI
@@ -32,37 +32,35 @@ import muistipeli.logics.StatisticsUusi;
  */
 public class UserInterface extends Application {
 
-    public int t; //pelin koko
-    public int k = 0; //määrittää onko kortin kääntö eka vai toka
-    public Button eka;
-    public Button toka;
+    public int gameSize;
+    public int order = 0; //määrittää onko kortin kääntö eka vai toka
+    public Button firstCard;
+    public Button secondCard;
     Players player1 = new Players("", 1, 0);
     Players player2 = new Players("", 1, 0);
-    private StatisticsUusi stats;
+    private FileStatisticsDao stats;
 
     @Override
     public void init() throws Exception {
-        System.out.println("init");
-        stats = new StatisticsUusi("statistics.txt");
-
+        stats = new FileStatisticsDao("statistics.txt");
     }
 
     @Override
-    public void start(Stage ikkuna) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
 
         Game game = new Game();
 
         GridPane firstPlayer = new GridPane();
-        TextField text1 = new TextField();
-        Button but1 = new Button("Seuraava");
-        firstPlayer.add(but1, 0, 2);
-        luoNakuna(firstPlayer, "Pelaajan 1 nimi", text1);//ekan pelaajan näkymä
+        TextField nameField1 = new TextField();
+        Button buttonNext = new Button("Seuraava");
+        firstPlayer.add(buttonNext, 0, 2);
+        createView(firstPlayer, "Pelaajan 1 nimi", nameField1);//ekan pelaajan näkymä
 
         GridPane secondPlayer = new GridPane();
-        Button but2 = new Button("Pelaamaan!");
-        secondPlayer.add(but2, 0, 2);
-        TextField text2 = new TextField();
-        luoNakuna(secondPlayer, "Pelaajan 2 nimi", text2);//tokan pelaajan näkymä
+        Button buttonStart = new Button("Pelaamaan!");
+        secondPlayer.add(buttonStart, 0, 2);
+        TextField nameField2 = new TextField();
+        createView(secondPlayer, "Pelaajan 2 nimi", nameField2);//tokan pelaajan näkymä
 
         ToggleGroup butGroup = new ToggleGroup();
         RadioButton butEasy = new RadioButton("Helppo");
@@ -92,7 +90,6 @@ public class UserInterface extends Application {
         newGame.setVisible(false);
 
         GridPane root = new GridPane();
-        //root.setPrefSize(500, 500);
         root.add(turn1, 110, 20);
         root.add(turn2, 110, 50);
         root.add(p1Points, 2, 20);
@@ -103,44 +100,43 @@ public class UserInterface extends Application {
 
         Scene scene = new Scene(root, 400, 400);
 
-        Scene first = new Scene(firstPlayer);
-        Scene second = new Scene(secondPlayer);
+        Scene firstScene = new Scene(firstPlayer);
+        Scene secondScene = new Scene(secondPlayer);
 
-        but1.setOnAction(
-                (event) -> {
-                    player1.setName1(text1.getText());
-                    ikkuna.setScene(second);
-                    Label tesi1 = new Label("  " + player1.getName());
-                    root.add(tesi1, 100, 20);
-                }
+        buttonNext.setOnAction((event) -> {
+            player1.setName1(nameField1.getText());
+            primaryStage.setScene(secondScene);
+            Label nameLabel1 = new Label("  " + player1.getName());
+            root.add(nameLabel1, 100, 20);
+        }
         );
-        but2.setOnAction((event) -> {
+        buttonStart.setOnAction((event) -> {
 
-            player2.setName2(text2.getText());
+            player2.setName2(nameField2.getText());
             if (player1.namesDiffer(player1.getName(), player2.getName())) {
                 try {
-                    stats.addTime("kak", player1, player2);
+                    stats.addPlayer(player1, player2);
                 } catch (Exception ex) {
                     Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                ikkuna.setScene(scene);
+                primaryStage.setScene(scene);
 
-                Label tesi2 = new Label("  " + player2.getName());
-                root.add(tesi2, 100, 50);
+                Label nameLabel2 = new Label("  " + player2.getName());
+                root.add(nameLabel2, 100, 50);
                 if (butGroup.getSelectedToggle() == butEasy) {
-                    t = 6;
+                    gameSize = 8;
                     game.fillEasy();
-                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox,stats);
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox, stats);
                 }
                 if (butGroup.getSelectedToggle() == butNormal) {
-                    t = 8;
+                    gameSize = 10;
                     game.fill();
-                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox,stats);
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox, stats);
                 }
                 if (butGroup.getSelectedToggle() == butHard) {
-                    t = 12;
+                    gameSize = 12;
                     game.fillHard();
-                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox,stats);
+                    board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox, stats);
                 }
             }
 
@@ -149,9 +145,9 @@ public class UserInterface extends Application {
 
         newGame.setOnAction((event) -> {
             game.newGame();
-            Collections.shuffle(game.taulukko);
+            Collections.shuffle(game.cards);
             vbox.getChildren().clear();
-            board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox,stats);
+            board(game, p1Points, p2Points, turn1, turn2, winner, newGame, vbox, stats);
             newGame.setVisible(false);
             winner.setVisible(false);
             player1.newGame();
@@ -160,7 +156,7 @@ public class UserInterface extends Application {
             p2Points.setText(player2.getNumberOfPairs());
             game.showTurn(turn1, turn2);
             try {
-                stats.addTime("kak", player1, player2);
+                stats.addPlayer(player1, player2);
             } catch (Exception ex) {
                 Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -168,29 +164,29 @@ public class UserInterface extends Application {
         }
         );
 
-        ikkuna.setScene(first);
-        ikkuna.show();
+        primaryStage.setScene(firstScene);
+        primaryStage.show();
 
     }
 
     /**
      * Tämä metodi asettelee pelaajien nimienasetusnäkymät
      *
-     * @param asettelu
-     * @param kak teksti kumman pelaajan nimi tulee
+     * @param layout GridPane-pohja
+     * @param str teksti kumman pelaajan nimi tulee
      * @param text textfield
      * @return palauttaa asettelun
      */
-    private GridPane luoNakuna(GridPane asettelu, String kak, TextField text) {
+    private GridPane createView(GridPane layout, String str, TextField text) {
 
-        asettelu.add(new Label(kak), 0, 0);
-        asettelu.add(text, 0, 1);
-        asettelu.setPrefSize(300, 180);
-        asettelu.setAlignment(Pos.CENTER);
-        asettelu.setVgap(10);
-        asettelu.setHgap(10);
-        asettelu.setPadding(new Insets(20, 20, 20, 20));
-        return asettelu;
+        layout.add(new Label(str), 0, 0);
+        layout.add(text, 0, 1);
+        layout.setPrefSize(300, 180);
+        layout.setAlignment(Pos.CENTER);
+        layout.setVgap(10);
+        layout.setHgap(10);
+        layout.setPadding(new Insets(20, 20, 20, 20));
+        return layout;
     }
 
     /**
@@ -206,9 +202,9 @@ public class UserInterface extends Application {
      * @param vbox napit tässä vboxissa
      */
     private void board(Game game, Label p1Points, Label p2Points, Label turn1, Label turn2, Label winner,
-            Button newGame, VBox vbox, StatisticsUusi stats) {
-        Button[] buttonContainer = new Button[t];
-        for (int i = 0; i < t; i++) {
+            Button newGame, VBox vbox, FileStatisticsDao stats) {
+        Button[] buttonContainer = new Button[gameSize];
+        for (int i = 0; i < gameSize; i++) {
 
             int f = i;
             Button button = new Button();
@@ -217,21 +213,21 @@ public class UserInterface extends Application {
             button.setOnAction((ActionEvent event) -> {
 
                 if (button.getText().equals("***")) {
-                    if (k % 2 == 0) {
+                    if (order % 2 == 0) {
                         game.turnCard(button, f);
-                        eka = (Button) event.getSource();
-                        k++;
+                        firstCard = (Button) event.getSource();
+                        order++;
                     } else {
                         game.turnCard(button, f);
-                        toka = (Button) event.getSource();
-                        game.checkIfPairs(eka, toka, game.whosTurn(player1, player2));//tarkistaa löytyikö pari sekä
-                        p1Points.setText(player1.getNumberOfPairs());                 //lisää pisteen oikealle pelaajalle jos löytyi
+                        secondCard = (Button) event.getSource();
+                        game.checkIfPairs(firstCard, secondCard, game.whosTurn(player1, player2));
+                        p1Points.setText(player1.getNumberOfPairs());
                         p2Points.setText(player2.getNumberOfPairs());
-                        k--;
+                        order--;
                         game.showTurn(turn1, turn2);
-                        if (game.checkGameOver(player1, player2)) {         //Jos peli on loppu
-                            game.checkWinner(player1, player2, winner,stats);     //julista voittaja
-                            newGame.setVisible(true);                       //uusi peli -nappi näkyviin (ei tee vielä mitään)
+                        if (game.checkGameOver(player1, player2)) {
+                            game.checkWinner(player1, player2, winner, stats);
+                            newGame.setVisible(true);
                         }
                     }
                 } else {
@@ -240,8 +236,8 @@ public class UserInterface extends Application {
 
             });
 
-            buttonContainer[i] = button;//lisää nappi arryhin
-            vbox.getChildren().add(buttonContainer[i]);//lisää napit vboxiin
+            buttonContainer[i] = button;
+            vbox.getChildren().add(buttonContainer[i]);
 
         }
     }

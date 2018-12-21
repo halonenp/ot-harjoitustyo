@@ -15,7 +15,7 @@ import javafx.animation.PauseTransition;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
-import muistipeli.logics.StatisticsUusi;
+import muistipeli.dao.FileStatisticsDao;
 import muistipeli.ui.UserInterface;
 
 /**
@@ -25,12 +25,12 @@ import muistipeli.ui.UserInterface;
  */
 public class Game {
 
-    public final List<String> taulukko;
-    public int vuoro;
+    public final List<String> cards;
+    public int turn;
 
     public Game() {
-        this.taulukko = new ArrayList<>();
-        this.vuoro = 0;
+        this.cards = new ArrayList<>();
+        this.turn = 0;
     }
 
     /**
@@ -38,40 +38,42 @@ public class Game {
      */
     public void fillEasy() {
         for (int i = 0; i < 2; i++) {
-            this.taulukko.add("karhu");
-            this.taulukko.add("mursu");
-            this.taulukko.add("sandels");
+            this.cards.add("auto");
+            this.cards.add("mopo");
+            this.cards.add("vene");
+            this.cards.add("bussi");
         }
-        Collections.shuffle(taulukko);
+        Collections.shuffle(cards);
     }
 
     public void fill() {
         for (int i = 0; i < 2; i++) {
-            this.taulukko.add("karhu");
-            this.taulukko.add("mursu");
-            this.taulukko.add("norsu");
-            this.taulukko.add("sandels");
+            this.cards.add("limu");
+            this.cards.add("olut");
+            this.cards.add("vesi");
+            this.cards.add("maito");
+            this.cards.add("mehu");
         }
-        Collections.shuffle(taulukko);
+        Collections.shuffle(cards);
     }
 
     public void fillHard() {
         for (int i = 0; i < 2; i++) {
-            this.taulukko.add("karhu");
-            this.taulukko.add("mursu");
-            this.taulukko.add("sandels");
-            this.taulukko.add("koff");
-            this.taulukko.add("jallu");
-            this.taulukko.add("maito");
+            this.cards.add("karhu");
+            this.cards.add("marsu");
+            this.cards.add("hylje");
+            this.cards.add("koira");
+            this.cards.add("haukka");
+            this.cards.add("apina");
         }
-        Collections.shuffle(taulukko);
+        Collections.shuffle(cards);
     }
 
     /**
      * asettaa vuoron takaisin pelaajalle 1
      */
     public void newGame() {
-        this.vuoro = 0;
+        this.turn = 0;
     }
 
     /**
@@ -81,7 +83,7 @@ public class Game {
      * @param i kortin paikka taulukossa
      */
     public void turnCard(final Button b, final int i) {
-        b.setText(this.taulukko.get(i));
+        b.setText(this.cards.get(i));
     }
 
     /**
@@ -99,7 +101,7 @@ public class Game {
 
         } else {
             turnBack(b, c);
-            this.vuoro++;
+            this.turn++;
         }
     }
 
@@ -129,7 +131,7 @@ public class Game {
      * @return palauttaa vuorossa olevan pelaajan
      */
     public Players whosTurn(final Players first, final Players second) {
-        if (this.vuoro % 2 == 0) {
+        if (this.turn % 2 == 0) {
             return first;
         } else {
             return second;
@@ -143,7 +145,7 @@ public class Game {
      * @param p2 p2 vuoro-label
      */
     public void showTurn(Label p1, Label p2) {
-        if (this.vuoro % 2 == 0) {
+        if (this.turn % 2 == 0) {
             p2.setVisible(false);
             p1.setVisible(true);
         } else {
@@ -161,7 +163,7 @@ public class Game {
      * @return true jos peli on loppu
      */
     public boolean checkGameOver(Players fir, Players sec) {
-        if (fir.getIntNumebrOfPairs() + sec.getIntNumebrOfPairs() == taulukko.size() / 2) {
+        if (fir.getIntNumberOfPairs() + sec.getIntNumberOfPairs() == cards.size() / 2) {
 
             return true;
         } else {
@@ -170,40 +172,35 @@ public class Game {
     }
 
     /**
-     * Jos peli loppu, niin julistaa voittajan labelillä
+     * Jos peli loppu, niin julistaa voittajan labelillä ja voittajalle +1
+     * voittoihin tekstitiedostossa
      *
      * @param fir player1
      * @param sec player2
      * @param winner voittajan julistus -label
-     * @param stats
+     * @param stats tekstitiedosto mihin kirjoitetaan
      */
-    public void checkWinner(Players fir, Players sec, Label winner, StatisticsUusi stats) {
-        if (checkGameOver(fir, sec)) {
-            winner.setVisible(true);
-            if (fir.getIntNumebrOfPairs() > sec.getIntNumebrOfPairs()) {
-                winner.setText(fir.getName() + " on voittaja!");
-                try {
-                    stats.PointForWinner(fir);
-                } catch (Exception ex) {
-                    Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-            if (sec.getIntNumebrOfPairs() > fir.getIntNumebrOfPairs()) {
-                winner.setText(sec.getName() + " on voittaja!");
-                try {
-                    stats.PointForWinner(sec);
-                } catch (Exception ex) {
-                    Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-            if (fir.getIntNumebrOfPairs() == sec.getIntNumebrOfPairs()) {
-                winner.setText("Tasapeli!");
-
+    public void checkWinner(Players fir, Players sec, Label winner, FileStatisticsDao stats) {
+        winner.setVisible(true);
+        if (fir.getIntNumberOfPairs() > sec.getIntNumberOfPairs()) {
+            winner.setText(fir.getName() + " on voittaja!");
+            try {
+                stats.pointForWinner(fir);
+            } catch (Exception ex) {
+                Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        if (sec.getIntNumberOfPairs() > fir.getIntNumberOfPairs()) {
+            winner.setText(sec.getName() + " on voittaja!");
+            try {
+                stats.pointForWinner(sec);
+            } catch (Exception ex) {
+                Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if (fir.getIntNumberOfPairs() == sec.getIntNumberOfPairs()) {
+            winner.setText("Tasapeli!");
+        }
     }
 
 }

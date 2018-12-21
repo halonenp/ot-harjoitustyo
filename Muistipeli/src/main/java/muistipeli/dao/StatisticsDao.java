@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package muistipeli.logics;
+package muistipeli.dao;
 
 /**
  *
  * @author halon
  */
-import java.util.List;
 import muistipeli.players.Players;
 
 public interface StatisticsDao {
 
-    Players findByUsername(String username);
+    boolean newPlayer(Players player);
 
-    String addTime(String time, Players fir, Players sec) throws Exception;
+    void pointForWinner(Players player) throws Exception;
 
-    List<Players> getAll();
+    Players findByPlayerName(String name);
+
+    void addPlayer(Players fir, Players sec) throws Exception;
+
 }

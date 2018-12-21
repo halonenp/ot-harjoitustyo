@@ -5,11 +5,8 @@ package logics;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import muistipeli.logics.Game;
 import muistipeli.players.Players;
-import static org.hamcrest.CoreMatchers.hasItems;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,10 +20,8 @@ import static org.junit.Assert.*;
  */
 public class LogicsTest {
 
-    Players player1 = new Players("first", 1,0);
-    Players player2 = new Players("second", 1,0);
-    public Button button;
-    public Button button2;
+    Players player1 = new Players("first", 1, 0);
+    Players player2 = new Players("second", 1, 0);
 
     public LogicsTest() {
 
@@ -53,51 +48,45 @@ public class LogicsTest {
     public void cardsExist() {
         Game game = new Game();
         game.fill();
-        assertFalse(game.taulukko.isEmpty());
+        assertFalse(game.cards.isEmpty());
     }
 
     @Test
     public void correctAmountOfCards() {
         Game game = new Game();
         game.fill();
-        assertEquals(game.taulukko.size(), 8);
+        assertEquals(game.cards.size(), 10);
     }
 
     @Test
     public void correctAmountOfCardsEasy() {
         Game game = new Game();
         game.fillEasy();
-        assertFalse(game.taulukko.isEmpty());
-        assertEquals(game.taulukko.size(), 6);
+        assertFalse(game.cards.isEmpty());
+        assertEquals(game.cards.size(), 8);
     }
 
     @Test
     public void correctAmountOfCardsHard() {
         Game game = new Game();
         game.fillHard();
-        assertFalse(game.taulukko.isEmpty());
-        assertEquals(game.taulukko.size(), 12);
+        assertFalse(game.cards.isEmpty());
+        assertEquals(game.cards.size(), 12);
     }
 
     @Test
     public void p1StartsNewGame() {
         Game game = new Game();
-        game.vuoro = 5;
+        game.turn = 5;
         game.newGame();
-        assertEquals((game.vuoro), 0);
+        assertEquals((game.turn), 0);
 
     }
 
-//    @Test
-//    public void gameHasPairs() {
-//        Game game = new Game();
-//        game.fill();
-//        assertThat(game.taulukko, hasItems("sandels", "sandels"));
-//    }
     @Test
     public void cardsAreEmptyBeforeStart() {
         Game game = new Game();
-        assertEquals(game.taulukko.size(), 0);
+        assertEquals(game.cards.size(), 0);
     }
 
     @Test
@@ -112,7 +101,7 @@ public class LogicsTest {
     public void rightPlayersTurn2() {
         Game game = new Game();
         game.fill();
-        game.vuoro++;
+        game.turn++;
         assertEquals(game.whosTurn(player1, player2), player2);
 
     }
@@ -131,32 +120,8 @@ public class LogicsTest {
         player1.itsAMatch();
         player1.itsAMatch();
         player1.itsAMatch();
+        player1.itsAMatch();
         assertEquals(game.checkGameOver(player1, player2), true);
     }
 
-//    @Test
-//    public void cardsAreTurning() {
-//
-//        Game game = new Game();
-//
-//        game.fill();
-//        game.checkIfPairs(button, button2, player1);
-//        game.turnCard(button, 0);
-//
-//        assertEquals(button.getText(), !button.getText().equals("***"));
-//
-//    }
-//    @Test
-//    public void gameWinner() {
-//        Label winner = new Label(" ");
-//        Game game = new Game();
-//        game.fill();
-//        game.checkWinner(player1, player2, winner);
-//        assertEquals(winner.getText().equals(" "), " ");
-//    }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }
