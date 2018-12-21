@@ -1,5 +1,10 @@
 # Käyttöohje
 
+Lataa tiedosto [muistipeli.jar
+
+## Konfigurointi
+
+Ohjelma käyttää tilastointiin paikallista tekstitiedostoa statistics.txt. Jos tätä ei löydy ennestään, niin ohjelma luo sen itse käynnistyessään.
 
 ## Ohjelman käynnistäminen
 
@@ -14,7 +19,7 @@ Sovellus käynnistyy näkymään, jossa ensimmäinen pelajaa syöttää nimensä
 <img width="238" alt="kayttoohje22" src="https://user-images.githubusercontent.com/39950699/49817151-2d236f80-fd78-11e8-9300-82a2c2b641cb.PNG">
 
 Tässä näkymässä syötetään toisen pelaajan nimi sekä valitaan pelin vaikeusaste. Tyhjä nimikenttä asettaa pelaajille oletusnimet.
-Vaikeusaste on oletusarvoisesti kohdassa "Helppo".
+Vaikeusaste on oletusarvoisesti kohdassa "Helppo". Helpossa moodissa pelissä on 4 paria, normaalissa 5 ja vaikeassa 6.
 
 ## Pelaaminen
 
@@ -29,3 +34,7 @@ Pelaajan tehtävänä on löytää painikkeista pareja. Painamalla painiketta, j
 
 
 Näkymässä näkyy pelaajien pisteet, jotka alkavat nollasta. Nuoli osoittaa kumman pelaajan vuoro on sillä hetkellä. Peli alkaa ensimmäisen pelaajan vuorolla. Pelin loputtua näkymään tulee Uusi Peli! -painike, jota painamalla alkaa uusi peli.
+
+## Tilastointi
+
+Kun pelin aloittaa, niin ohjelma tallentaa syötetyt nimet tekstitiedostoon nimeltä statistics.txt, sekä kasvattaa pelattujen pelien lukumäärää yhdellä. Jos nimi löytyy jo tekstitiedostosta, niin nimeä ei lisätä uudelleen. Tällöin vain pelattujen pelien lukumäärä kasvaa. Pelin päätyttyä voittajan voitettujen pelien lukumäärää kasvatetaan yhdellä. Tilastoja voi tarkkailla tiedostosta statistics.txt, jossa tiedot ovat kirjattu *nimi,pelatutu pelit,voitot*. Jokainen pelaaja on omalla rivillään.
